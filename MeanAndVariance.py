@@ -1,7 +1,16 @@
 from NumberList import NumberList # NumberList class is in file NumberList.py
 import sys # for sys.argv and sys.exit() 
 
+def mean (data):
+    return sum(data)/len(data)
+ # function implementation goes here
 
+def variance (data):
+    m = sum(data)/len(data)
+    var = sum((x-m)**2 for x in data) / len(data)
+    return var
+ # function implementation goes here
+ 
 def main():
     nlist = NumberList()
 

@@ -18,7 +18,7 @@ class NumberList:
                     gotNDataCorrectly = True
                 else:
                     print("_getNDataFromKeyboard: ndata should be >=2")
-            except (NameError, SyntaxError):
+            except (NameError, SyntaxError,ValueError):
                 print("_getNDataFromKeyboard: ndata should be an integer!")
          # end while loop
         return int(ndata) # we accept float numbers but "floor" them to int 
@@ -26,20 +26,22 @@ class NumberList:
     def getDataFromKeyboard(self):
         ndata = self._getNDataFromKeyboard() 
         mydata=[]
-        gotDataCorrectly = False #a Flag to loop until getting data correctly
-        while gotDataCorrectly == False:
-            for n in range (0,ndata):
+        
+        for n in range (0,ndata):    
+        
+            gotDataCorrectly = False #a Flag to loop until getting data correctly
+            while gotDataCorrectly == False:
                 try:
-                    print("Enter data element")
+                    print("Enter data element "+ str(n+1)+":")
                     datainput = float(input())#read from the keyboard
                     mydata.append(datainput)
-                except(NameError,SyntaxError):
-                    print("getDataFromKeyboard: data should be a float number")  
-            #endforloop
-            gotDataCorrectly = True  
-        #end while loop
+                    gotDataCorrectly = True 
+
+                except(NameError,SyntaxError,ValueError):
+                    print("getDataFromKeyboard: data should be a float number")        
+            #endwhile          
+        #endforloop
         NumberList.setData(self,mydata)
-    
 
 # end class
 def mean (data):
