@@ -20,7 +20,7 @@ class NumberList:
                     gotNDataCorrectly = True
                 else:
                     print("_getNDataFromKeyboard: ndata should be >=2")
-            except (NameError, SyntaxError):
+            except (NameError, SyntaxError,ValueError):
                 print("_getNDataFromKeyboard: ndata should be an integer!")
          # end while loop
         return int(ndata) # we accept float numbers but "floor" them to int 
@@ -34,7 +34,7 @@ class NumberList:
             gotDataCorrectly = False #a Flag to loop until getting data correctly
             while gotDataCorrectly == False:
                 try:
-                    print("Enter data element")
+                    print("Enter data element "+ str(n+1)+":")
                     datainput = float(input())#read from the keyboard
                     mydata.append(datainput)
                     gotDataCorrectly = True 
@@ -44,6 +44,7 @@ class NumberList:
             #endwhile          
         #endforloop
         NumberList.setData(self,mydata)
+        
     def getRandomData(self,ndata,range1,range2=0):
         if ndata % 1 == 0 and ndata >= 2:
             if range1 > range2:#set two variables low and high according to the range1 and range2 values

@@ -1,3 +1,4 @@
+
 class NumberList:
     def __init__ (self): # the class constructor
         self._data = [] # initialises the _data “private” instance variable to an empty list
@@ -44,6 +45,8 @@ class NumberList:
         NumberList.setData(self,mydata)
 
 # end class
+
+from NumberList import NumberList
 def mean (data):
     return sum(data)/len(data)
  # function implementation goes here

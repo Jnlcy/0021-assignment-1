@@ -1,29 +1,59 @@
-try:
+
   
-  from random import randint
-  import random
-  random.seed(10)
+from random import randint
+import random
+random.seed(10)
 
-  #ask input from the user
-  x = int(input('Please enter the number of sides of the dice\n'))
-  y = int(input('Please enter the number of times to be thrown\n'))
-  if x <= 0 or y <= 0:
-    raise IndexError
-    
-  else:
+#function to get input side of the dice from the key board
+def getNSidefromKeyboard():
+  print("Enter number of side: ")#ask input from user
+  gotSideCorrectly = False #set a flag to loop until getting correct input
+  while gotSideCorrectly == False:
+    try:
+      nside = int(input())
+      if nside > 0:
+        gotSideCorrectly =True
+      else:
+        print("getNSidefromKeyboard: The dice should have positive number of sides.")
+    except(NameError,ValueError):
+        print("getNSidefromKeyboard: Number of sides should be interger!")
+  #end of while loop     
+  return int(nside) 
 
-  #initialize the list of size y
-    Dice_list = [None]*(y+1)
+#function to get number of times to throw the dice from the user
+def getNThrowfromKeyboard():
+  print("Enter number of times to throw:")
+  gotThrowCorrectly = False #set a flag to loop until getting correct input
+  while gotThrowCorrectly == False:
+    try:
+      nthrow = int(input())
+      if nthrow > 0:
+        gotThrowCorrectly =True
+      else:
+         print("getNThrowfromKeyboard: Number of throwe should be interger.")
+    except(NameError,ValueError):
+      print("getNThrowfromKeyboard: Number of throwe should be interger!")
+  #end of while loop
+  return int(nthrow) 
+
+def main():
+  nside = getNSidefromKeyboard()
+  nthrow = getNThrowfromKeyboard()
+#initialize the list of size y
+  Dice_list = [None]*nthrow
+
   #store random values in a list
-    for i in range (0,y):
-      Dice_list[i] = randint(1,x)
+  for i in range (0,nthrow):
+    Dice_list[i] = randint(1,nside)
+  #end of for loop
+  print("Results:")
+  print(Dice_list)
   #count elements of the list 
-    for j in range(1,x+1):
-      count = Dice_list.count(j)
-      print('Number of',j,':',count)
-      
-#except cases where the      
-except ValueError:
-  print('Please input integer numbers')
-except IndexError:
-  print('Inputs has to be positive')
+  for j in range(1,nside+1):
+    count = Dice_list.count(j)
+    print('Number of',j,':',count)
+  #end of for loop
+
+if __name__ == "__main__":
+  main() 
+
