@@ -46,24 +46,37 @@ class NumberList:
         NumberList.setData(self,mydata)
         
     def getRandomData(self,ndata,range1,range2=0):
-        if ndata % 1 == 0 and ndata >= 2:
-            if range1 > range2:#set two variables low and high according to the range1 and range2 values
-                high = range1
-                low = range2
+        Validity = False
+        try:    
+            ndata=int(ndata)
+            range1=float(range1)
+            range2=float(range2)
+            
 
-            elif range1 < range2:
-                high = range2
-                low =range1
+            if ndata % 1 == 0 and ndata >= 2:
+                if range1 != range2:
+                    if range1 > range2:#set two variables low and high according to the range1 and range2 values
+                        high = range1
+                        low = range2
+
+                    else :
+                        high = range2
+                        low =range1
+                    mydata=[] #initialise an empty list
+
+                    for i in range (0,ndata):
+                        mydata.append(random.random() *(high-low) + low)
+                    #end of for loop
+                    NumberList.setData(self,mydata)  
+                    Validity = True
+
+                else:
+                    print("The range should not be the same")              
             else:
-                print("The range should not be the same")
-            mydata=[] #initialise an empty list
-
-            for i in range (0,ndata):
-                mydata.append(random.random() *(high-low) + low)
-            #end of for loop
-            NumberList.setData(self,mydata)
-        else:
-            print("getRandomData:Number of data should be >=2")
+                print("getRandomData:Number of data should be >=2")
+        except(NameError,TypeError,ValueError):
+            print("getRandomData:The range should be numbers")
+        return Validity
     
     
 

@@ -31,7 +31,7 @@ def getNThrowfromKeyboard():
         gotThrowCorrectly =True
       else:
          print("getNThrowfromKeyboard: Number of throwe should be interger.")
-    except(NameError,ValueError):
+    except(NameError,ValueError,TypeError):
       print("getNThrowfromKeyboard: Number of throwe should be interger!")
   #end of while loop
   return int(nthrow) 
