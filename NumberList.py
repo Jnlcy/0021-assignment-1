@@ -25,6 +25,7 @@ class NumberList:
          # end while loop
         return int(ndata) # we accept float numbers but "floor" them to int 
     
+    #This function get element of number list from keyboard one by one
     def getDataFromKeyboard(self):
         ndata = self._getNDataFromKeyboard() 
         mydata=[]
@@ -44,9 +45,10 @@ class NumberList:
             #endwhile          
         #endforloop
         NumberList.setData(self,mydata)
-        
+    
+    #This function generates random numbers in the given range
     def getRandomData(self,ndata,range1,range2=0):
-        Validity = False
+        Validity = False #Check if the input argument is valid
         try:    
             ndata=int(ndata)
             range1=float(range1)

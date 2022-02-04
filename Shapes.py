@@ -8,13 +8,13 @@ class Shape(object):
     # and should be redefined in all derived classes
     @abstractmethod
     def getName (self):
-        pass # could also put return but this “implies” implementation
+        pass #This method will return the name of the shape
     @abstractmethod
     def getArea (self):
-        pass
+        pass#This method will return the area of the shape
     @abstractmethod
     def getVolume (self):
-        pass
+        pass#This mathod will return the volume of the shape
 
 
 class Point(Shape):
@@ -116,7 +116,7 @@ class Rectangle(Point):
         if b>0:
             self._b = b
 
-class Square(Rectangle):
+class Square(Rectangle):#code is reusable as the square is a special case of the square
     def __init__(self,x,y,a):
         super().__init__(x,y,a,a)
         self._l = 0
@@ -127,7 +127,7 @@ class Square(Rectangle):
         return self._a * self._a
     def __str__ (self):
         return "C = " + super().__str__() + "; L = " + str(self._a)
-    def getLength (self): # get/set radius methods return self._r
+    def getLength (self): # get/set radius methods return self._a
         return self._a
     def setLength (self, a): 
         if a > 0:
@@ -145,11 +145,12 @@ class Cube(Square):
     def __str__ (self):
         return super().__str__()
 
+#This function prints all the shapes in the list when called
 def printAllShape(shapes):
-    for s in range(0,len(shapes)): 
+    for s in range(0,len(shapes)): #print all shapes using index
         print(str(s+1) +". "+ shapes[s].getName() + " " + str(shapes[s]) + " Area: " + str(shapes[s].getArea()) +  " Volume: " + str(shapes[s].getVolume())) 
 
-
+#This function allows the user to print all shapes or single shape
 def printShapes(shapes):
     if not shapes:
         print("printShapes: There isn't any created shape")
@@ -178,122 +179,200 @@ def printShapes(shapes):
             except (TypeError,NameError,ValueError):
                 print("printShapes: Please enter options on the menu")
     
-
-        
-def getShapeFromKeyboard(shapes):#use this function to get input information from the key board
-    print("Please select a shape from the following list:\nPoint -- Enter 1\t2.Circle -- Enter 2\tCylinder -- Enter 3\tSphere -- Enter 4\nRectangle -- Enter 5\tSquare -- Enter 6\tCube -- Enter 7\t")
-    getShapeCorrectly =False
+#This function take user input and create new shape        
+def getShapeFromKeyboard(shapes):#use this function to get input information from the key board  
+    getShapeCorrectly =False #create a flag to loop until the shape is correct
     while getShapeCorrectly ==False:
+        print("Please select a shape from the following list:\nPoint -- Enter 1\t2.Circle -- Enter 2\tCylinder -- Enter 3\tSphere -- Enter 4\nRectangle -- Enter 5\tSquare -- Enter 6\tCube -- Enter 7\t")
         shapeType = int(input())
         try:
             if shapeType in range(1,8):
-                if shapeType == 1: 
-                    x = input("Enter x values of the point: ")
-                    y = input("Enter y values of y: ")
-                    point=Point(x,y)
-                    shapes.append(point)
+                try:
+                    if shapeType == 1: #create point
+                        x = float(input("Enter x values of the point: "))
+                        y = float(input("Enter y values of y: "))
+                        point=Point(x,y)
+                        shapes.append(point)
                     
 
-                elif shapeType == 2:
-                    x=input("Enter x: ")
-                    y=input("Enter y: ")
-                    r=int(input("Enter r: "))
-                    circle=Circle(x,y,r)
-                    shapes.append(circle)
-                    #print("Circle "+ str(circle) + " Area "+ circle.getArea())
+                    elif shapeType == 2:#create circle
+                        x=float(input("Enter x: "))
+                        y=float(input("Enter y: "))
+                        r=float(input("Enter r: "))
+                        circle=Circle(x,y,r)
+                        shapes.append(circle)
+                   
 
-                elif shapeType == 3:
-                    x,y=input("Enter x and y: ").split()
-                    r =int(input("Enter r: "))
-                    h =int(input("Enter h: "))
-                    cylinder = Cylinder(x,y,r,h)
-                    shapes.append(cylinder)
+                    elif shapeType == 3:#create cylinder
+                        x = float(input("Enter x value: "))
+                        y = float(input("Enter y value: "))
+                        r =float(input("Enter r: "))
+                        h =float(input("Enter h: "))
+                        cylinder = Cylinder(x,y,r,h)
+                        shapes.append(cylinder)
                     
 
-                elif shapeType == 4:
-                    x,y,= input("Enter x, yof the sphere: ").split()
-                    r =int(input("Enter r: "))
-                    sphere = Sphere(x,y,r)
-                    shapes.append(sphere)
+                    elif shapeType == 4:#create sphere
+                        x = float(input("Enter x value: "))
+                        y = float(input("Enter y value: "))
+                        r =float(input("Enter r: "))
+                        sphere = Sphere(x,y,r)
+                        shapes.append(sphere)
                     
 
-                elif shapeType == 5:
-                    x,y= input("Enter x, y: ").split()
-                    a = int(input("Enter a: "))
-                    b = int(input("Enter b: "))
-                    rectangle = Rectangle(x,y,a,b)
-                    shapes.append(rectangle)
-                    
+                    elif shapeType == 5:#create rectangle
+                        x = float(input("Enter x value: "))
+                        y = float(input("Enter y value: "))
+                        a = float(input("Enter a: "))
+                        b = float(input("Enter b: "))
+                        rectangle = Rectangle(x,y,a,b)
+                        shapes.append(rectangle)                 
 
 
-                elif shapeType == 6:
-                    x,y=input("Enter x,y : ").split()
-                    a = int(input("Enter a: "))
-                    square = Square(x,y,a)
-                    shapes.append(square)
+                    elif shapeType == 6:#create square
+                        x = float(input("Enter x value: "))
+                        y = float(input("Enter y value: "))
+                        a = float(input("Enter a: "))
+                        square = Square(x,y,a)
+                        shapes.append(square)
                     
 
-                elif shapeType == 7:
-                    x,y=input("Enter x,y : ").split()
-                    a = int(input("Enter a: "))
-                    cube = Cube(x,y,a)
-                    shapes.append(cube)
+                    elif shapeType == 7:#create cube
+                        x = float(input("Enter x value: "))
+                        y = float(input("Enter y value: "))
+                        a = float(input("Enter a: "))
+                        cube = Cube(x,y,a)
+                        shapes.append(cube)
                     
-                #end of all cases
-                print("Shape added")  
-                getShapeCorrectly =True
+                    #end of all cases
+                    print("Shape added")  
+                    getShapeCorrectly =True
+                except(ValueError,NameError,TypeError):
+                    print("getShapeFromKeyboard:Please enter numbers for the parameter, try again.")
+
             else:
-                print("Please enter options on the menu, try again")
-        
-        except(ValueError,NameError):
-            print("getShapeFromKeyboard:Please enter the required number of parameters")
-        except(TypeError):
-            print("getShapeFromKeyboard:Please enter interger")
+                print("getShapeFromKeyboard:Please enter options on the menu, try again")
+            #end of if
+    #End of while loop
+        except(ValueError,NameError,TypeError):
+            print("getShapeFromKeyboard:Please enter numbers for the options, try again")
        
-        
+#This fucntion deletes selected shape        
 def deleteShape(shapes):
-    printAllShape(shapes)
-    print("Please select a shape to delete: ")
-    EnterShapeCorrectly =False
-    while EnterShapeCorrectly ==False:
-        try:
-            i = int(input())#The list of shapes start from 1 but element index starts from 
-            if i >=1 & i<=len(shapes)+1:
-                shapes.remove(shapes[i-1])
-                print("deleteShape: Shape removed")
-                EnterShapeCorrectly =True
-            else:
-                print("deleteShapes: shape dosen't exsit, try again")
-        except(TypeError,ValueError):
-            print("deleteShape: Please select shape from the list, try again")
+    if not shapes:
+        print("modifyShape: There isn't any created shape")
+    else:
+        printAllShape(shapes)
+        print("Please select a shape to delete: ")
+        EnterShapeCorrectly =False
+        while EnterShapeCorrectly ==False:
+            try:
+                i = int(input())#The list of shapes start from 1 but element index starts from 
+                if i >=1 & i<=len(shapes)+1:
+                    shapes.remove(shapes[i-1])
+                    print("deleteShape: Shape removed")
+                    EnterShapeCorrectly =True
+                else:
+                    print("deleteShapes: shape dosen't exsit, try again")
+            except(TypeError,ValueError):
+                print("deleteShape: Please select shape from the list, try again")
+        #End of while loop
+    
+#This function allows the user to modify existed shape
+def modifyShape(shapes):
+    if not shapes:
+        print("modifyShape: There isn't any created shape")
+    else:
+        
+        EnterShapeCorrectly =False
+        while EnterShapeCorrectly ==False:
+            printAllShape(shapes)
+            print("Please select a shape to modify: ")
+            try:
+                i = int(input())-1#The list of shapes start from 1 but element index starts from 
+                if i >=0 & i<=len(shapes):
+                    name = shapes[i].getName()
+                    try:
+                        if name== "Point":
+                            x = float(input("Enter x value: "))
+                            y = float(input("Enter y value: "))
+                            shapes[i] =Point(x,y)           
+                        
 
+                        elif name == "Circle":
+                            x=float(input("Enter x: "))
+                            y=float(input("Enter y: "))
+                            r=float(input("Enter r: "))
+                            shapes[i] = Circle(x,y,r)
+                        
 
+                        elif name == "Cylinder":
+                            x = float(input("Enter x value : "))
+                            y = float(input("Enter y value : "))
+                            r =float(input("Enter r: "))
+                            h =float(input("Enter h: "))
+                            shapes[i] = Cylinder(x,y,r,h)
+
+                        elif name == "Sphere":
+                            x = float(input("Enter x value : "))
+                            y = float(input("Enter y value : "))
+                            r =float(input("Enter r: "))
+                            shapes[i] = Sphere(x,y,r)
+
+                        elif name == "Rectangle":
+                            x = float(input("Enter x value : "))
+                            y = float(input("Enter y value : "))
+                            a = float(input("Enter a: "))
+                            b = float(input("Enter b: "))
+                            shapes[i] = Rectangle(x,y,a,b)
+                    
+                        elif name == "Square":
+                            x = float(input("Enter x value : "))
+                            y = float(input("Enter y value : "))
+                            a = float(input("Enter a: "))
+                            shapes[i] = Square(x,y,a)
+
+                        elif name == "Cube":
+                            x = float(input("Enter x value: "))
+                            y = float(input("Enter y value: "))
+                            a = float(input("Enter a: "))
+                            shapes[i] = Cube(x,y,a)
+
+                        print("modifyShape: Shape modified")
+                        EnterShapeCorrectly =True
+                    except(ValueError,NameError,TypeError):
+                        print("getShapeFromKeyboard:Please enter numbers for the parameter, try again.")
+                    
+                else:
+                    print("modifyShape: shape dosen't exsit, try again")
+            except(TypeError,ValueError,IndexError):
+                print("modifyShape: Please select shape from the list and enter interger value,try again.")
+            #end of while loop
 
 
 def main():
     shapes = []#create an empyt list of shapes
+    
+    
+    """
+    Hard coded shapes used to test the code--PLEASE IGNORE
+
     point = Point(10, 20)
     circle = Circle(30, 40, 5)
-    cylinder = Cylinder(50, 60, 10, 20)
-    square=Square(1,1,1)
-    cube = Cube(1,1,1)
+    cylinder = Cylinder(50, 60, 10, 20) 
     shapes.append(point)
     shapes.append(circle)
     shapes.append(cylinder)
-    shapes.append(square)
-    shapes.append(cube)
-    
-    
+    """
     getOptionCorrectly =False #create a flag to loop until the correct option is entered
     while getOptionCorrectly ==False:
-        print("Menu:\nPrint shapes -- Enter 1\t  Create new shape -- Enter 2\t  Edit shapes -- Enter 3\t Exit -- Enter 4")
+        print("Menu:\nPrint shapes -- Enter 1\t  Create new shape -- Enter 2\t  Delete shape -- Enter 3\tModify shape -- Enter 4\t Exit -- Enter 5")
+        
         try:
-            option = int(input())
-
+            option = int(input())#ask input from user
             if option ==1:
                 printShapes(shapes)
-                
-               
+                             
             elif option ==2:
                 getShapeFromKeyboard(shapes)
                 
@@ -302,6 +381,9 @@ def main():
                 deleteShape(shapes)
 
             elif option ==4:
+                modifyShape(shapes)
+
+            elif option ==5:#The program keeps runing until the user selected to exit
                 getOptionCorrectly =True
 
             else:
@@ -313,8 +395,3 @@ def main():
 
 if __name__ =="__main__":
         main()
-
-
-        
-
-

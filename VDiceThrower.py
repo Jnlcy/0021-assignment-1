@@ -14,9 +14,9 @@ def getNSidefromKeyboard():
       if nside > 0:
         gotSideCorrectly =True
       else:
-        print("getNSidefromKeyboard: The dice should have positive number of sides.")
+        print("getNSidefromKeyboard: The dice should have positive number of sides,try again!")
     except(NameError,ValueError):
-        print("getNSidefromKeyboard: Number of sides should be interger!")
+        print("getNSidefromKeyboard: Number of sides should be interger, try again!")
   #end of while loop     
   return int(nside) 
 
@@ -30,17 +30,17 @@ def getNThrowfromKeyboard():
       if nthrow > 0:
         gotThrowCorrectly =True
       else:
-         print("getNThrowfromKeyboard: Number of throwe should be interger.")
+         print("getNThrowfromKeyboard: Number of throwe should be interger,try again!")
     except(NameError,ValueError,TypeError):
-      print("getNThrowfromKeyboard: Number of throwe should be interger!")
+      print("getNThrowfromKeyboard: Number of throwe should be interger,try again!")
   #end of while loop
   return int(nthrow) 
 
 def main():
   nside = getNSidefromKeyboard()
   nthrow = getNThrowfromKeyboard()
-#initialize the list of size y
-  Dice_list = [None]*nthrow
+
+  Dice_list = [None]*nthrow#initialize the list of size y
 
   #store random values in a list
   for i in range (0,nthrow):
@@ -49,6 +49,7 @@ def main():
   print("Results:")
   print(Dice_list)
   #count elements of the list 
+  
   for j in range(1,nside+1):
     count = Dice_list.count(j)
     print('Number of',j,':',count)
